@@ -90,3 +90,48 @@ body {
   }
   
 
+
+
+  .clock {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Orbitron', serif;
+    color: #ff7b00;
+    
+  }
+
+
+  
+
+  #wheel {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    overflow: hidden;
+    background: red;
+  }
+  #marker {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #result {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }

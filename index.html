@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <title>Menú con dos opciones</title>
+    <!--CSS -->
     <link rel="stylesheet" href="style.css">
+    <!--JS -->
     <script src="code.js"></script>
+    <!--Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
   </head>
-  <body>
+  <body onload="updateClock()">
+
     <nav>
       <ul>
         <li><a href="#reloj">Reloj</a></li>
@@ -23,15 +28,19 @@
         <span id="second">00</span>
       </div>
 
-
     </section>
+
+    
+    
     
 
     <section id="ruleta">
       <h2>Ruleta</h2>
-      <p>hola</p>
-
+      <div id="wheel"></div>
+  <button onclick="spinWheel()">Girar</button>
+  <div id="result"></div>
     </section>
   
+    
   </body>
 </html>
