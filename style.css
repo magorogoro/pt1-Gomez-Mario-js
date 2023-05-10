@@ -10,7 +10,7 @@ body {
   /* Modo oscuro */
   .dark-mode {
   background-color: black;
-  color: white;
+
 }
   
   nav {
@@ -89,3 +89,4 @@ body {
     cursor: not-allowed;
   }
   
+
