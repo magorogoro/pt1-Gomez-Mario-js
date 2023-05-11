@@ -13,7 +13,7 @@ function activarSonido() {
 
 
 // Actualizar el reloj
-function updateClock() {
+function reloj() {
 
 
   // Obtener la hora actual
@@ -41,10 +41,11 @@ let secondElement = document.getElementById('second');
   secondElement.textContent = seconds;
 
   // Actualizar el reloj cada segundo
-setInterval(updateClock, 1000);
+setInterval(reloj, 1000);
 
+}
 
-
+function ruleta(){
 const sectors = [
   {color:"#f82", label:"Juan"},
   {color:"#0bf", label:"Lucas"},
@@ -139,4 +140,4 @@ elSpin.addEventListener("click", () => {
 sectors.forEach(drawSector);
 rotate();
 
- }
+}
