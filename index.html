@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
   </head>
-  <body onload="reloj(); ruleta(); actualizarReloj(); reproducirMusica(); ">
+  <body onload="reloj(); ruleta(); actualizarReloj();  ">
 
     <nav>
       <ul>
@@ -36,10 +36,10 @@
         <input type="number" id="minutos1" placeholder="Minutos (0-59)" min="0" max="59" />
     
         <h2 id="reloj1"></h2>
-      </div>
 
-      
-      <div>
+
+
+      </div>
         <label>Horas:</label>
         <input type="number" id="input-horas" placeholder="Horas" min="0" />
       </div>
@@ -54,7 +54,9 @@
       
       <button id="btnIniciar" onclick="iniciarTemporizador()">Iniciar</button>
       
-      <h2 id="reloj">00:00:00</h2>
+      <h2 id="reloj_countdown">00:00:00</h2>
+      <div>
+    
   
     </section>
 

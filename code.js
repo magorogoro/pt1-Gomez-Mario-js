@@ -88,7 +88,7 @@ function iniciarTemporizador() {
                          minutos.toString().padStart(2, '0') + ':' +
                          segundos.toString().padStart(2, '0');
 
-    document.getElementById('reloj').innerHTML = tiempoRestante;
+    document.getElementById('reloj_countdown').innerHTML = tiempoRestante;
 
     if (totalSegundos <= 0) {
       clearInterval(intervalo);
@@ -98,12 +98,14 @@ function iniciarTemporizador() {
     totalSegundos--;
   }, 1000);
 
-  function reproducirSonido() {
-    // Coloca aquí la ruta del archivo de música que deseas reproducir
-    var archivoSonido = 'alarma.mp3';
-    var audio = new Audio(archivoSonido);
-    audio.play();
-  }
+  
+}
+
+function reproducirSonido() {
+  // Coloca aquí la ruta del archivo de música que deseas reproducir
+  var archivoSonido = 'alarma.mp3';
+  var audio = new Audio(archivoSonido);
+  audio.play();
 }
 
 
