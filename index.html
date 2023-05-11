@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
   </head>
-  <body onload="reloj(); ruleta(); actualizarReloj(); iniciarCuentaRegresiva(); ">
+  <body onload="reloj(); ruleta(); actualizarReloj(); reproducirMusica(); ">
 
     <nav>
       <ul>
@@ -39,21 +39,9 @@
       </div>
 
 
-      <form>
-        <label for="horas">Horas:</label>
-        <input type="number" id="horas" min="0" max="23" required>
-        
-        <label for="minutos">Minutos:</label>
-        <input type="number" id="minutos" min="0" max="59" required>
-        
-        <label for="segundos">Segundos:</label>
-        <input type="number" id="segundos" min="0" max="59" required>
-        
-        <button type="button" onclick="iniciarCuentaRegresiva()">Iniciar</button>
-      </form>
+      <div>
       
-      <div id="contador"></div>
-
+  
     </section>
 
     

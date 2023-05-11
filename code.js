@@ -65,50 +65,48 @@ function actualizarReloj() {
   }
 
   setTimeout(actualizarReloj, 1000);
+}
 
-  function reproducirMusica() {
-    var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
-    audio.play();
-  }
-  
+function reproducirMusica() {
+  var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
+  audio.play();
 }
 
 
-//CUENTA ATRAS
-function iniciarCuentaRegresiva() {
-  var horas = parseInt(document.getElementById('horas').value);
-  var minutos = parseInt(document.getElementById('minutos').value);
-  var segundos = parseInt(document.getElementById('segundos').value);
-  
+// CUENTA ATRAS
+function iniciarTemporizador() {
+  var horas = parseInt(document.getElementById('input-horas').value);
+  var minutos = parseInt(document.getElementById('input-minutos').value);
+  var segundos = parseInt(document.getElementById('input-segundos').value);
+
   var totalSegundos = horas * 3600 + minutos * 60 + segundos;
-  
+
   var intervalo = setInterval(function() {
     var horas = Math.floor(totalSegundos / 3600);
     var minutos = Math.floor((totalSegundos % 3600) / 60);
     var segundos = totalSegundos % 60;
-    
+
     var tiempoRestante = horas.toString().padStart(2, '0') + ':' +
                          minutos.toString().padStart(2, '0') + ':' +
                          segundos.toString().padStart(2, '0');
-    
-    document.getElementById('contador').innerHTML = tiempoRestante;
-    
+
+    document.getElementById('reloj').innerHTML = tiempoRestante;
+
     if (totalSegundos <= 0) {
       clearInterval(intervalo);
       reproducirMusica();
     }
-    
+
     totalSegundos--;
   }, 1000);
 }
 
 function reproducirMusica() {
   // Coloca aquí la ruta del archivo de música que deseas reproducir
-  var archivoMusica = 'alarma.mp3';
+  var archivoMusica = 'ruta_del_archivo_musica.mp3';
   var audio = new Audio(archivoMusica);
   audio.play();
 }
-
 
 //RULETA
 function ruleta(){
