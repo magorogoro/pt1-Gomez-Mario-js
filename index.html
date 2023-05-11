@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
   </head>
-  <body onload="reloj(); ruleta();">
+  <body onload="reloj(); ruleta(); actualizarReloj(); iniciarCuentaRegresiva(); ">
 
     <nav>
       <ul>
@@ -28,6 +28,32 @@
         <span id="second">00</span>
       </div>
 
+      
+      <div>
+        <h1>Hora exacte de finalització</h1>
+
+        <input type="number" id="horas1" placeholder="Horas (0-23)" min="0" max="23" />
+        <input type="number" id="minutos1" placeholder="Minutos (0-59)" min="0" max="59" />
+    
+        <h2 id="reloj1"></h2>
+      </div>
+
+
+      <form>
+        <label for="horas">Horas:</label>
+        <input type="number" id="horas" min="0" max="23" required>
+        
+        <label for="minutos">Minutos:</label>
+        <input type="number" id="minutos" min="0" max="59" required>
+        
+        <label for="segundos">Segundos:</label>
+        <input type="number" id="segundos" min="0" max="59" required>
+        
+        <button type="button" onclick="iniciarCuentaRegresiva()">Iniciar</button>
+      </form>
+      
+      <div id="contador"></div>
+
     </section>
 
     
@@ -39,7 +65,7 @@
       <div id="ruleta">
         <canvas id="wheel" width="500" height="500"></canvas>
         <div id="spin" onclick="activarSonido()">SPINER</div>
-        <audio id="sonido" src="sonido.mp3"></audio>
+        <audio id="sonido" src="sonido_ruleta.mp3"></audio>
 
     </section>
     

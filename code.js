@@ -1,6 +1,6 @@
 
 
-/* Modo Oscuro Menu Navegacion */
+/* DARK MODE */
 function myFunction() {
    var element = document.body;
    element.classList.toggle("dark-mode");
@@ -11,40 +11,106 @@ function activarSonido() {
 }
 
 
-
-// Actualizar el reloj
+//RELOJ
 function reloj() {
 
-
-  // Obtener la hora actual
   const currentTime = new Date();
   let hours = currentTime.getHours();
   let minutes = currentTime.getMinutes();
   let seconds = currentTime.getSeconds();
 
-  // Agregar un cero inicial a los números menores de 10
   hours = (hours < 10) ? "0" + hours : hours;
- minutes = (minutes < 10) ? "0" + minutes : minutes;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
   seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-
-
-  // Actualizar el contenido HTML de los elementos del reloj
-
-  // Obtener elementos del reloj
-let hourElement = document.getElementById('hour');
-let minuteElement = document.getElementById('minute');
-let secondElement = document.getElementById('second');
+  let hourElement = document.getElementById('hour');
+  let minuteElement = document.getElementById('minute');
+  let secondElement = document.getElementById('second');
 
   hourElement.textContent = hours;
   minuteElement.textContent = minutes;
   secondElement.textContent = seconds;
 
-  // Actualizar el reloj cada segundo
-setInterval(reloj, 1000);
+  setInterval(reloj, 1000);
+}
+// INDICA HORA EXACTA FINALIZACION
+function actualizarReloj() {
+  var fecha = new Date();
+  var horas = fecha.getHours();
+  var minutos = fecha.getMinutes();
 
+  var horasUsuario = document.getElementById("horas1").value;
+  var minutosUsuario = document.getElementById("minutos1").value;
+
+  if (horasUsuario !== "") {
+    horasUsuario = parseInt(horasUsuario);
+  }
+  if (minutosUsuario !== "") {
+    minutosUsuario = parseInt(minutosUsuario);
+  }
+
+  horas = ("0" + horas).slice(-2);
+  minutos = ("0" + minutos).slice(-2);
+
+  document.getElementById("reloj1").textContent = horas + ":" + minutos;
+
+  // Obtiene la fecha y hora actual del sistema
+  var fechaActual = new Date();
+  var horasActuales = fechaActual.getHours();
+  var minutosActuales = fechaActual.getMinutes();
+
+  // Comprueba si se alcanzó la hora configurada
+  if (horasUsuario === horasActuales && minutosUsuario === minutosActuales) {
+    reproducirMusica();
+  }
+
+  setTimeout(actualizarReloj, 1000);
+
+  function reproducirMusica() {
+    var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
+    audio.play();
+  }
+  
 }
 
+
+//CUENTA ATRAS
+function iniciarCuentaRegresiva() {
+  var horas = parseInt(document.getElementById('horas').value);
+  var minutos = parseInt(document.getElementById('minutos').value);
+  var segundos = parseInt(document.getElementById('segundos').value);
+  
+  var totalSegundos = horas * 3600 + minutos * 60 + segundos;
+  
+  var intervalo = setInterval(function() {
+    var horas = Math.floor(totalSegundos / 3600);
+    var minutos = Math.floor((totalSegundos % 3600) / 60);
+    var segundos = totalSegundos % 60;
+    
+    var tiempoRestante = horas.toString().padStart(2, '0') + ':' +
+                         minutos.toString().padStart(2, '0') + ':' +
+                         segundos.toString().padStart(2, '0');
+    
+    document.getElementById('contador').innerHTML = tiempoRestante;
+    
+    if (totalSegundos <= 0) {
+      clearInterval(intervalo);
+      reproducirMusica();
+    }
+    
+    totalSegundos--;
+  }, 1000);
+}
+
+function reproducirMusica() {
+  // Coloca aquí la ruta del archivo de música que deseas reproducir
+  var archivoMusica = 'alarma.mp3';
+  var audio = new Audio(archivoMusica);
+  audio.play();
+}
+
+
+//RULETA
 function ruleta(){
 const sectors = [
   {color:"#f82", label:"Juan"},
@@ -56,7 +122,6 @@ const sectors = [
   {color:"#f8b", label:"Manuel"},
   {color:"#bf0", label:"Antonio"},
 ];
-
 const elSpin = document.querySelector("#spin");
 const ctx = document.querySelector("#wheel").getContext("2d");
 const dia = ctx.canvas.width;
@@ -72,9 +137,7 @@ let ang = 0;
 let isSpinning = false;
 let isAccelerating = false;
 let animFrame = null;
-
 const getIndex = () => Math.floor(tot - ang / TAU * tot) % tot;
-
 const drawSector = (sector, i) => {
   const angle = arc * i;
   ctx.save();
@@ -92,43 +155,35 @@ const drawSector = (sector, i) => {
   ctx.fillText(sector.label, rad - 10, 10);
   ctx.restore();
 };
-
 const rotate = () => {
   const sector = sectors[getIndex()];
   ctx.canvas.style.transform = `rotate(${ang - Math.PI / 2}rad)`;
   elSpin.textContent = !angVel ? "SPIN" : sector.label;
   elSpin.style.background = sector.color;
 };
-
 const frame = () => {
   if (!isSpinning) return;
-
   if (angVel >= angVelMax) isAccelerating = false;
-
   if (isAccelerating) {
     angVel ||= angVelMin;
     angVel *= 1.1;
   } else {
     isAccelerating = false;
     angVel *= friction;
-
     if (angVel < angVelMin) {
       isSpinning = false;
       angVel = 0;
       cancelAnimationFrame(animFrame);
     }
   }
-
   ang += angVel;
   ang %= TAU;
   rotate();
 };
-
 const engine = () => {
   frame();
   animFrame = requestAnimationFrame(engine);
 };
-
 elSpin.addEventListener("click", () => {
   if (isSpinning) return;
   isSpinning = true;
@@ -136,8 +191,8 @@ elSpin.addEventListener("click", () => {
   angVelMax = Math.random() * (0.4 - 0.25) + 0.25;
   engine();
 });
-
 sectors.forEach(drawSector);
 rotate();
-
 }
+
+
