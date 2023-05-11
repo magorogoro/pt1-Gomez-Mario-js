@@ -52,7 +52,7 @@ function actualizarReloj() {
   horas = ("0" + horas).slice(-2);
   minutos = ("0" + minutos).slice(-2);
 
-  document.getElementById("reloj1").textContent = horas + ":" + minutos;
+  document.getElementById("reloj1").textContent = horasUsuario + ":" + minutosUsuario;
 
   var fechaActual = new Date();
   var horasActuales = fechaActual.getHours();
