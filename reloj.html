@@ -1,60 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Reloj de cuenta regresiva</title>
-</head>
-<body>
-  <h1>Reloj de cuenta regresiva</h1>
-  
-  <form>
-    <label for="horas">Horas:</label>
-    <input type="number" id="horas" min="0" max="23" required>
-    
-    <label for="minutos">Minutos:</label>
-    <input type="number" id="minutos" min="0" max="59" required>
-    
-    <label for="segundos">Segundos:</label>
-    <input type="number" id="segundos" min="0" max="59" required>
-    
-    <button type="button" onclick="iniciarCuentaRegresiva()">Iniciar</button>
-  </form>
-  
-  <div id="contador"></div>
-  
-  <script>
-    function iniciarCuentaRegresiva() {
-      var horas = parseInt(document.getElementById('horas').value);
-      var minutos = parseInt(document.getElementById('minutos').value);
-      var segundos = parseInt(document.getElementById('segundos').value);
-      
-      var totalSegundos = horas * 3600 + minutos * 60 + segundos;
-      
-      var intervalo = setInterval(function() {
-        var horas = Math.floor(totalSegundos / 3600);
-        var minutos = Math.floor((totalSegundos % 3600) / 60);
-        var segundos = totalSegundos % 60;
-        
-        var tiempoRestante = horas.toString().padStart(2, '0') + ':' +
-                             minutos.toString().padStart(2, '0') + ':' +
-                             segundos.toString().padStart(2, '0');
-        
-        document.getElementById('contador').innerHTML = tiempoRestante;
-        
-        if (totalSegundos <= 0) {
-          clearInterval(intervalo);
+  <head>
+    <title>Hora exacta de finalización</title>
+    <style>
+      /* Estilos CSS */
+    </style>
+    <script>
+      function actualizarReloj() {
+        var fecha = new Date();
+        var horas = fecha.getHours();
+        var minutos = fecha.getMinutes();
+
+        var horasUsuario = document.getElementById("horas1").value;
+        var minutosUsuario = document.getElementById("minutos1").value;
+
+        if (horasUsuario !== "") {
+          horasUsuario = parseInt(horasUsuario);
+        }
+        if (minutosUsuario !== "") {
+          minutosUsuario = parseInt(minutosUsuario);
+        }
+
+        horas = ("0" + horas).slice(-2);
+        minutos = ("0" + minutos).slice(-2);
+
+        document.getElementById("reloj1").textContent = horas + ":" + minutos;
+
+        var fechaActual = new Date();
+        var horasActuales = fechaActual.getHours();
+        var minutosActuales = fechaActual.getMinutes();
+
+        // Comprueba si se alcanzó la hora configurada
+        if (horasUsuario === horasActuales && minutosUsuario === minutosActuales) {
           reproducirMusica();
         }
-        
-        totalSegundos--;
-      }, 1000);
-    }
-    
-    function reproducirMusica() {
-      // Coloca aquí la ruta del archivo de música que deseas reproducir
-      var archivoMusica = 'sonido_ruleta.mp3';
-      var audio = new Audio(archivoMusica);
-      audio.play();
-    }
-  </script>
-</body>
+
+        setTimeout(actualizarReloj, 1000);
+      }
+
+      function reproducirMusica() {
+        var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
+        audio.play();
+      }
+    </script>
+  </head>
+  <body onload="actualizarReloj()">
+    <div>
+      <h1>Hora exacta de finalización</h1>
+
+      <input type="number" id="horas1" placeholder="Horas (0-23)" min="0" max="23" />
+      <input type="number" id="minutos1" placeholder="Minutos (0-59)" min="0" max="59" />
+
+      <h2 id="reloj1"></h2>
+    </div>
+  </body>
 </html>

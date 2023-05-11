@@ -38,9 +38,23 @@
         <h2 id="reloj1"></h2>
       </div>
 
-
-      <div>
       
+      <div>
+        <label>Horas:</label>
+        <input type="number" id="input-horas" placeholder="Horas" min="0" />
+      </div>
+      <div>
+        <label>Minutos:</label>
+        <input type="number" id="input-minutos" placeholder="Minutos" min="0" max="59" />
+      </div>
+      <div>
+        <label>Segundos:</label>
+        <input type="number" id="input-segundos" placeholder="Segundos" min="0" max="59" />
+      </div>
+      
+      <button id="btnIniciar" onclick="iniciarTemporizador()">Iniciar</button>
+      
+      <h2 id="reloj">00:00:00</h2>
   
     </section>
 

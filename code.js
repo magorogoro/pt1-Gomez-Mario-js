@@ -54,7 +54,6 @@ function actualizarReloj() {
 
   document.getElementById("reloj1").textContent = horas + ":" + minutos;
 
-  // Obtiene la fecha y hora actual del sistema
   var fechaActual = new Date();
   var horasActuales = fechaActual.getHours();
   var minutosActuales = fechaActual.getMinutes();
@@ -71,7 +70,6 @@ function reproducirMusica() {
   var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
   audio.play();
 }
-
 
 // CUENTA ATRAS
 function iniciarTemporizador() {
@@ -94,19 +92,21 @@ function iniciarTemporizador() {
 
     if (totalSegundos <= 0) {
       clearInterval(intervalo);
-      reproducirMusica();
+      reproducirSonido();
     }
 
     totalSegundos--;
   }, 1000);
+
+  function reproducirSonido() {
+    // Coloca aquí la ruta del archivo de música que deseas reproducir
+    var archivoSonido = 'alarma.mp3';
+    var audio = new Audio(archivoSonido);
+    audio.play();
+  }
 }
 
-function reproducirMusica() {
-  // Coloca aquí la ruta del archivo de música que deseas reproducir
-  var archivoMusica = 'ruta_del_archivo_musica.mp3';
-  var audio = new Audio(archivoMusica);
-  audio.play();
-}
+
 
 //RULETA
 function ruleta(){
