@@ -36,11 +36,15 @@
 
     <section id="ruleta">
       <h2>Ruleta</h2>
-      <div id="wheel"></div>
-  <button onclick="spinWheel()">Girar</button>
-  <div id="result"></div>
+      <div id="ruleta">
+        <canvas id="wheel" width="500" height="500"></canvas>
+        <div id="spin" onclick="activarSonido()">SPINER</div>
+        <audio id="sonido" src="sonido.mp3"></audio>
+
     </section>
   
-    
+    <script src="code.js"></script>
+
   </body>
+  
 </html>
