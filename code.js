@@ -1,19 +1,20 @@
 
 
 /* DARK MODE */
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
+function modo_oscuro() {
+  document.body.classList.toggle("dark-mode");
 }
+
+
+ /* SONIDO ONCLICK RULETA */
 function activarSonido() {
-  var audio = document.getElementById("sonido");
-  audio.play();
+ var audio = document.getElementById("sonido");
+ audio.play();
 }
 
 
 //RELOJ
 function reloj() {
-
   const currentTime = new Date();
   let hours = currentTime.getHours();
   let minutes = currentTime.getMinutes();
@@ -31,8 +32,11 @@ function reloj() {
   minuteElement.textContent = minutes;
   secondElement.textContent = seconds;
 
-  setInterval(reloj, 1000);
+  requestAnimationFrame(reloj);
 }
+
+reloj();
+
 // INDICA HORA EXACTA FINALIZACION
 function actualizarReloj() {
   var fecha = new Date();
@@ -63,49 +67,53 @@ function actualizarReloj() {
     reproducirMusica();
   }
 
-  setTimeout(actualizarReloj, 1000);
+  requestAnimationFrame(actualizarReloj);
 }
 
 function reproducirMusica() {
-  var audio = new Audio("alarma.mp3"); // Ruta de tu archivo de música
+  var audio = document.getElementById("alarma-audio");
   audio.play();
 }
+
+
+actualizarReloj();
+
 
 // CUENTA ATRAS
 function iniciarTemporizador() {
-  var horas = parseInt(document.getElementById('input-horas').value);
-  var minutos = parseInt(document.getElementById('input-minutos').value);
-  var segundos = parseInt(document.getElementById('input-segundos').value);
+ var horas = parseInt(document.getElementById('input-horas').value);
+ var minutos = parseInt(document.getElementById('input-minutos').value);
+ var segundos = parseInt(document.getElementById('input-segundos').value);
 
-  var totalSegundos = horas * 3600 + minutos * 60 + segundos;
+ var totalSegundos = horas * 3600 + minutos * 60 + segundos;
 
-  var intervalo = setInterval(function() {
-    var horas = Math.floor(totalSegundos / 3600);
-    var minutos = Math.floor((totalSegundos % 3600) / 60);
-    var segundos = totalSegundos % 60;
+ var intervalo = setInterval(function() {
+   var horas = Math.floor(totalSegundos / 3600);
+   var minutos = Math.floor((totalSegundos % 3600) / 60);
+   var segundos = totalSegundos % 60;
 
-    var tiempoRestante = horas.toString().padStart(2, '0') + ':' +
-                         minutos.toString().padStart(2, '0') + ':' +
-                         segundos.toString().padStart(2, '0');
+   var tiempoRestante = horas.toString().padStart(2, '0') + ':' +
+                        minutos.toString().padStart(2, '0') + ':' +
+                        segundos.toString().padStart(2, '0');
 
-    document.getElementById('reloj_countdown').innerHTML = tiempoRestante;
+   document.getElementById('reloj_countdown').innerHTML = tiempoRestante;
 
-    if (totalSegundos <= 0) {
-      clearInterval(intervalo);
-      reproducirSonido();
-    }
+   if (totalSegundos <= 0) {
+     clearInterval(intervalo);
+     reproducirSonido();
+   }
 
-    totalSegundos--;
-  }, 1000);
+   totalSegundos--;
+ }, 1000);
 
-  
+ 
 }
 
 function reproducirSonido() {
-  // Coloca aquí la ruta del archivo de música que deseas reproducir
-  var archivoSonido = 'alarma.mp3';
-  var audio = new Audio(archivoSonido);
-  audio.play();
+ // Coloca aquí la ruta del archivo de música que deseas reproducir
+ var archivoSonido = 'alarma.mp3';
+ var audio = new Audio(archivoSonido);
+ audio.play();
 }
 
 
@@ -113,14 +121,14 @@ function reproducirSonido() {
 //RULETA
 function ruleta(){
 const sectors = [
-  {color:"#f82", label:"Juan"},
-  {color:"#0bf", label:"Lucas"},
-  {color:"#fb0", label:"Albert"},
-  {color:"#0fb", label:"Pepe"},
-  {color:"#b0f", label:"Angel"},
-  {color:"#f0b", label:"Jose"},
-  {color:"#f8b", label:"Manuel"},
-  {color:"#bf0", label:"Antonio"},
+ {color:"#f82", label:"Juan"},
+ {color:"#0bf", label:"Lucas"},
+ {color:"#fb0", label:"Albert"},
+ {color:"#0fb", label:"Pepe"},
+ {color:"#b0f", label:"Angel"},
+ {color:"#f0b", label:"Jose"},
+ {color:"#f8b", label:"Manuel"},
+ {color:"#bf0", label:"Antonio"},
 ];
 const elSpin = document.querySelector("#spin");
 const ctx = document.querySelector("#wheel").getContext("2d");
@@ -139,57 +147,57 @@ let isAccelerating = false;
 let animFrame = null;
 const getIndex = () => Math.floor(tot - ang / TAU * tot) % tot;
 const drawSector = (sector, i) => {
-  const angle = arc * i;
-  ctx.save();
-  ctx.beginPath();
-  ctx.fillStyle = sector.color;
-  ctx.moveTo(rad, rad);
-  ctx.arc(rad, rad, rad, angle, angle + arc);
-  ctx.lineTo(rad, rad);
-  ctx.fill();
-  ctx.translate(rad, rad);
-  ctx.rotate(angle + arc / 2);
-  ctx.textAlign = "right";
-  ctx.fillStyle = "#fff";
-  ctx.font = "bold 24px sans-serif";
-  ctx.fillText(sector.label, rad - 10, 10);
-  ctx.restore();
+ const angle = arc * i;
+ ctx.save();
+ ctx.beginPath();
+ ctx.fillStyle = sector.color;
+ ctx.moveTo(rad, rad);
+ ctx.arc(rad, rad, rad, angle, angle + arc);
+ ctx.lineTo(rad, rad);
+ ctx.fill();
+ ctx.translate(rad, rad);
+ ctx.rotate(angle + arc / 2);
+ ctx.textAlign = "right";
+ ctx.fillStyle = "#fff";
+ ctx.font = "bold 24px sans-serif";
+ ctx.fillText(sector.label, rad - 10, 10);
+ ctx.restore();
 };
 const rotate = () => {
-  const sector = sectors[getIndex()];
-  ctx.canvas.style.transform = `rotate(${ang - Math.PI / 2}rad)`;
-  elSpin.textContent = !angVel ? "SPIN" : sector.label;
-  elSpin.style.background = sector.color;
+ const sector = sectors[getIndex()];
+ ctx.canvas.style.transform = `rotate(${ang - Math.PI / 2}rad)`;
+ elSpin.textContent = !angVel ? "SPIN" : sector.label;
+ elSpin.style.background = sector.color;
 };
 const frame = () => {
-  if (!isSpinning) return;
-  if (angVel >= angVelMax) isAccelerating = false;
-  if (isAccelerating) {
-    angVel ||= angVelMin;
-    angVel *= 1.1;
-  } else {
-    isAccelerating = false;
-    angVel *= friction;
-    if (angVel < angVelMin) {
-      isSpinning = false;
-      angVel = 0;
-      cancelAnimationFrame(animFrame);
-    }
-  }
-  ang += angVel;
-  ang %= TAU;
-  rotate();
+ if (!isSpinning) return;
+ if (angVel >= angVelMax) isAccelerating = false;
+ if (isAccelerating) {
+   angVel ||= angVelMin;
+   angVel *= 1.1;
+ } else {
+   isAccelerating = false;
+   angVel *= friction;
+   if (angVel < angVelMin) {
+     isSpinning = false;
+     angVel = 0;
+     cancelAnimationFrame(animFrame);
+   }
+ }
+ ang += angVel;
+ ang %= TAU;
+ rotate();
 };
 const engine = () => {
-  frame();
-  animFrame = requestAnimationFrame(engine);
+ frame();
+ animFrame = requestAnimationFrame(engine);
 };
 elSpin.addEventListener("click", () => {
-  if (isSpinning) return;
-  isSpinning = true;
-  isAccelerating = true;
-  angVelMax = Math.random() * (0.4 - 0.25) + 0.25;
-  engine();
+ if (isSpinning) return;
+ isSpinning = true;
+ isAccelerating = true;
+ angVelMax = Math.random() * (0.4 - 0.25) + 0.25;
+ engine();
 });
 sectors.forEach(drawSector);
 rotate();
